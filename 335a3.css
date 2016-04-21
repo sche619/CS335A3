@@ -1,0 +1,60 @@
+nav {
+  border-width: 0.25em 0;
+  border-style: solid;
+  border-color: red;
+  padding:0.5em;
+}
+nav a {
+  text-decoration: none;
+  padding-left:3em;
+  padding-right:3em;
+  font-size:1.5em;
+  color:#0000FF;
+}
+tr td {
+	padding:1em;
+	font-size:1.5em;
+	font-weight:bold;
+}
+
+#join {
+	padding-left:2em;
+	font-weight:bold;
+}
+#username{
+	padding-right:500px;
+	margin:35px;
+	
+	}
+#password{
+	padding-right:500px;
+	position:fixed;
+	left:150px;
+	}
+#comment {
+	padding-top:2em;
+	padding-left:2em;
+}
+#comment textarea {
+	margin-top:1.5em;
+	width:700px;
+	height:70px;
+}
+#comment input {
+	margin-left:10px;
+}
+#address {
+	width:800px;
+	height:100px;
+	}
+#commentButton {
+	margin:0.5em;
+}
+#shop input {
+	margin-top:1.5em;
+	margin-left:0.5em;
+	width:600px;
+}
+#buy {
+	font-size:1em;
+}

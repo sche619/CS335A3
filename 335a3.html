@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="335a3.css" type="text/css" />
+    <title>COMPSCI 335: Assignment #3 - La Boutique Cassée</title>
+	<script src="335a3.js"></script>
+	
+	<script>
+		window.onload = getBooks;
+	</script>
+
+  </head>
+  <body>
+    <h1 id="logo">
+      <img src="http://redsox.tcs.auckland.ac.nz/BC/Open/Service.svc/logo" width="800" height="200" alt="Logo" />
+    </h1>
+
+	<div>
+    <nav>
+      <a href="335a3.html" >Your shop</a>
+      <a href="Join.html" >Join the shop</a>
+      <a href="Comments.html">Your comments</a>
+    </nav>
+	</div>	
+	
+	<div id="shop">
+		<select id="item" onchange="select()">
+			<option value="Book">Books</option>
+			<option value="Blueray">Bluerays</option>
+		</select>
+		
+		<input id="search" type="search" oninput="search()">
+		<button type="submit" onclick="search()">Search</button>
+		<table id="showTab"></table>
+	</div>
+	
+	<div id="join">
+	
+	</div>
+	
+	<div id="comment">
+	</div>
+
+  </body>
+</html>

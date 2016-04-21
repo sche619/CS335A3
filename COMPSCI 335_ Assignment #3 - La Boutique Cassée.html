@@ -1,0 +1,296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!-- saved from url=(0069)https://www.cs.auckland.ac.nz/courses/compsci335s2c/assignments/mano/ -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+   <link rel="stylesheet" href="./COMPSCI 335_ Assignment #3 - La Boutique Cassée_files/manos.css" type="text/css">
+   <title>COMPSCI 335: Assignment #3 - La Boutique Cassée</title>
+</head>
+<body style="background-color: #ffffce">
+   <h2>
+      COMPSCI 335: Assignment #3 - La Boutique Cassée
+   </h2>
+   <h3>
+      Background
+   </h3>
+   <p>
+      La Boutique Cassée is an online shop selling books and blurays. The shop uses a
+      service-oriented architecture with a customer-facing UI front-end, and a service
+      back-end. The service back-end consists of two separate services and associated
+      RESTful interfaces.
+   </p>
+   <p>
+      One of the services is open to all, and allows the user to browse and search through
+      the shop. It also allows a user to place and view comments on the shop, as well
+      as to register at the shop. The other service is only for registered users and this
+      allows purchasing of items. Registered users are required to authenticate before
+      using this service.
+   </p>
+   <img alt="Logo" src="./COMPSCI 335_ Assignment #3 - La Boutique Cassée_files/ShopLogo.png" style="width: 100%; display: inline-block; vertical-align: middle;">
+   <h3>
+      Consuming the Service - Building a UI
+   </h3>
+   <p>
+      An online version of the two services supporting the shop are available at <a href="http://redsox.tcs.auckland.ac.nz/BC/Open/Service.svc">
+         http://redsox.tcs.auckland.ac.nz/BC/Open/Service.svc
+      </a> and <a href="http://redsox.tcs.auckland.ac.nz/BC/Closed/Service.svc">
+         http://redsox.tcs.auckland.ac.nz/BC/Closed/Service.svc
+      </a>. Both services
+      provide auto-generated help explaining the REST APIs they support.
+   </p>
+   <ol>
+      <li>
+         The API doc for the open service is available at <a href="http://redsox.tcs.auckland.ac.nz/BC/Open/Service.svc/help">
+            http://redsox.tcs.auckland.ac.nz/BC/Open/Service.svc/help
+         </a>
+      </li>
+      <li>
+         The API doc for the closed service is available at <a href="http://redsox.tcs.auckland.ac.nz/BC/Closed/Service.svc/help">
+            http://redsox.tcs.auckland.ac.nz/BC/Closed/Service.svc/help
+         </a>. While the API doc
+         for the open service is publicly accessible, the API doc for the closed service
+         is accessible only for registered users. To access this doc, you need to first register
+         yourself using the open service. Alternatively, the shop already has a user named
+         <em>bond007</em> whose password is <em>bond007passwd</em>, and you can pose as
+         this user.
+      </li>
+   </ol>
+   <p>
+      Please study the service carefully, using the API doc and by experimentation. You
+      can experiment using your browser and the inspection tools available with your browser
+      (e.g., <em>Web Inspector</em> on Safari, <a href="https://getfirebug.com/"><em>Firebug</em></a>
+      on Firefox, or <em>F12</em> on Chrome and IE). You may also wish to use HTTP debugging
+      tools such as <a href="http://www.telerik.com/fiddler">Fiddler</a>, <a href="https://www.cs.auckland.ac.nz/courses/compsci215s1c/resources/mano/W3Client-MacOS-10_10-x64.zip">
+         W3Client (MacOS)
+      </a>, and <a href="https://www.cs.auckland.ac.nz/courses/compsci215s1c/resources/mano/W3Client.exe">
+         W3Client (Windows)
+      </a>.
+   </p>
+   <p>
+      You are then asked to develop the customer-facing UI front-end using a combination of HTML, CSS, and JavaScript.
+      It is recommended that this UI is a single-page app (i.e., using a single HTML page).
+      There are three logical sections in the UI: (1) viewing the items being sold (books and blurays),
+      (2) viewing and leaving comments, and (3) user registration. The UI need to be functional and
+      clean, but does not have to be pretty. Screenshots of a sample UI are provided <a href="https://www.cs.auckland.ac.nz/courses/compsci335s2c/assignments/mano/ScreenShots/">
+         here
+      </a>.
+   </p>
+   <p>
+      The closed service at <a href="http://redsox.tcs.auckland.ac.nz/BC/Closed/Service.svc">
+         http://redsox.tcs.auckland.ac.nz/BC/Closed/Service.svc
+      </a> uses HTTP's digest authentication. Another instance of this service using
+      HTTP's basic authentication is available at <a href="http://redsox.tcs.auckland.ac.nz/BC/Closed2/Service.svc">
+         http://redsox.tcs.auckland.ac.nz/BC/Closed2/Service.svc
+      </a>.
+      These two services may help you to experiment with the differences between the two authentication mechanisms.
+      Note again that the two service instances are identical except for their use of the authentication.
+   </p>
+   <h3>
+      Pen-Testing the Service
+   </h3>
+   <p>
+      It is thought the service has a number of vulnerabilities. You are now asked to
+      penetration-test the service, and report your findings. You will first assume the
+      role of a network user who is able connect to the service with the view of injecting
+      code. You will then assume the role of a co-located user with access to the data
+      to give more insight into further potential vulnerabilities.
+   </p>
+   <p>
+      For this part, you will use local versions of the services and data. To this end,
+      please download copies of the open service, the closed service, and the data first.
+      You also need to change the <em>Web.config</em> files in the two services to point
+      to the local location where you have saved the data.
+   </p>
+   <ol>
+      <li>
+         <a href="http://redsox.tcs.auckland.ac.nz/CWS/CourseWorkService.svc/cwm?cid=BinDispatch&cname=OpenBC">
+            Open Service
+         </a>. Unzip the service and place it in a folder such as <em>H:\335\A3\Open</em>.
+         You can then run the service using the following command line:<br>
+         <em>"C:\Program Files\IIS Express\IISExpress.exe" /port:8188 /path:H:\335\A3\Open</em><br>
+         <br>
+         If you want to run IIS Express from a Windows PowerShell, you need to prefix the above command line with &amp;
+         so that PowerShell can execute the command (rather than treating the command as a string):<br>
+         <em>&amp; "C:\Program Files\IIS Express\IISExpress.exe" /port:8188 /path:H:\335\A3\Open</em><br>
+         <br>
+         Test the service by pointing your browser to <a href="http://localhost:8188/Service.svc/help">
+            http://localhost:8188/Service.svc/help
+         </a>. The browser is expected to show the
+         API doc you saw at <a href="http://redsox.tcs.auckland.ac.nz/BC/Open/Service.svc/help">
+            http://redsox.tcs.auckland.ac.nz/BC/Open/Service.svc/help
+         </a>. Stop the service
+         by quitting IIS Express.
+      </li>
+      <li>
+         <a href="http://redsox.tcs.auckland.ac.nz/CWS/CourseWorkService.svc/cwm?cid=BinDispatch&cname=ClosedBC">
+            Closed Service
+         </a>. Unzip the service and place it in a folder such as <em>H:\335\A3\Closed</em>.
+      </li>
+      <li>
+         <a href="http://redsox.tcs.auckland.ac.nz/CWS/CourseWorkService.svc/cwm?cid=BinDispatch&cname=DataBC">
+            Data
+         </a>. Unzip the data and place it in a folder such as <em>H:\335\A3\BoutiqueCasseeData</em>.
+      </li>
+      <li>
+         Now open the Web.config files in the two services, and find the line:
+         <br>
+         &lt;add key="DataRoot" value="C:/WebRoot/BoutiqueCasseeData/"/&gt;<br>
+         Change the value field to reflect where you saved the data. E.g., <em>H:\335\A3\BoutiqueCasseeData</em>.
+      </li>
+   </ol>
+   <p>
+      Now start the open service using IIS Express. If the data and the
+      open service are correctly set up, you should see a list of bluray titles when you
+      point your browser to <a href="http://localhost:8188/Service.svc/brlist">http://localhost:8188/Service.svc/brlist</a>.
+      Note that the output shown in the browser may not be well-formatted, and in this
+      case, you may wish to view the source to see the unformatted content.
+   </p>
+   <p>
+      You can test the closed service using the following command line:<br>
+      <em>"C:\Program Files\IIS Express\IISExpress.exe" /port:8189 /path:H:\335\A3\Closed</em><br>
+      Test the service by pointing your browser to <a href="http://localhost:8189/Service.svc/help">
+         http://localhost:8189/Service.svc/help
+      </a>. The browser is expected to show the
+      API doc you saw at <a href="http://redsox.tcs.auckland.ac.nz/BC/Closed/Service.svc/help">
+         http://redsox.tcs.auckland.ac.nz/BC/Closed/Service.svc/help
+      </a>.
+   </p>
+   <p>
+      You may find it helpful to use the UI you have already developed. This will require
+      you to change the service URLs in your UI implementation to point to the local services.
+   </p>
+   <p>
+      Please answer the questions below, first assuming the role of a network user, and
+      then assuming the role of a co-located user. Where the questions require you to
+      write an HTTP request, please provide a URL if the request is GET; if the request
+      is POST, please provide the complete request including all the necessary HTTP headers.
+      E.g.,
+   </p>
+   <div style="border: 5px solid lightblue; border-radius: 5px; padding: 20px; box-shadow: 5px 5px 3px 1px #999; background: linear-gradient(to right, white, #ffffce);">
+      <span class="code">
+         POST http://www.site.org/foo.cgi?t=Find HTTP/1.1<br>
+         Host: www.site.org<br>
+         Content-Type: text/plain<br>
+         Content-Length: 5<br>
+         <br>
+         Hello<br>
+      </span>
+   </div>
+   <h4>
+      Network User
+   </h4>
+   <p>
+      Assume now the role of a network user, and answer the following questions. Note
+      that if you corrupt the data during your pen-testing, you can reinstate a fresh
+      copy from what you originally downloaded.
+   </p>
+   <dl>
+      <dt>N01</dt>
+      <dd>
+         How many book titles are available in the store?
+      </dd>
+      <dt>N02</dt>
+      <dd>
+         How many bluray titles are available in the store?
+      </dd>
+      <dt>N03</dt>
+      <dd>
+         Find out where SQL injection is possible within the service APIs. Write down an
+         HTTP request that injects SQL.
+      </dd>
+      <dt>N04</dt>
+      <dd>
+         Find out where HTML injection is possible within the service APIs. Write down an
+         HTTP request that injects HTML.
+      </dd>
+      <dt>N05</dt>
+      <dd>
+         Using HTML injection above, write down an HTTP request that inserts an arbitrary
+         image into the UI you constructed.
+      </dd>
+      <dt>N06</dt>
+      <dd>
+         Find out where cross-site scripting (XSS) is possible within the service
+         APIs. Write down an HTTP request that executes a cross-site scripting attack.
+      </dd>
+   </dl>
+   <h4>
+      Co-Located User
+   </h4>
+   <p>
+      Assume now the role of a co-located user, and answer the following questions. This
+      will require you to study the data used by the services. Note that if you corrupt
+      the data during your pen-testing, you can reinstate a fresh copy from what you originally
+      downloaded.
+   </p>
+   <dl>
+      <dt>C01</dt>
+      <dd>
+         Open the database file using a binary editor (e.g., <a href="http://frhed.sourceforge.net/en/">
+            frhed
+         </a> on Windows or <a href="http://www.suavetech.com/0xed/">0xED</a> on
+         MacOS). Use the <a href="https://en.wikipedia.org/wiki/Magic_number_%28programming%29">
+            magic number
+         </a> in the file to find out the name of the database management
+         system. Write down the name of this database management system.
+      </dd>
+      <dt>C02</dt>
+      <dd>
+         Download a tool that is able to open the contents of the above database, and examine
+         the contents of the database using this tool. How many tables exist in the database?
+      </dd>
+      <dt>C03</dt>
+      <dd>
+         One of the tables in the database contains user credentials. There are two users
+         in the supplied database, one is <em>bond007</em>, what is the name of the other?
+      </dd>
+      <dt>C04</dt>
+      <dd>
+         Find out the password of the user you mentioned in <em>C03</em> above. The password
+         is thought to be a common dictionary word. For example, you can find a list of commonly
+         used words <a href="http://www.wordfrequency.info/free.asp">here</a>.
+      </dd>
+      <dt>C05</dt>
+      <dd>
+         In the data pack the service uses, there is a folder called <em>BluraysBig</em>,
+         and the service does not use any of the images from this folder. Craft an HTTP request
+         that can still give a network user access to one of the images in this folder. Write
+         down this HTTP request.
+      </dd>
+      <dt>C06</dt>
+      <dd>
+         The services do not stop cross-site request forgery (CSRF) attacks. Describe in
+         a single sentence how a cross-site request forgery attack could be mounted on the
+         service.
+      </dd>
+      <dt>C07</dt>
+      <dd>
+         Combine the CSRF vulnerability you found above in C06 and the XSS vulnerability you
+         mentioned in N06 in an HTTP request. Write this request down.
+      </dd>
+   </dl>
+   <h3>
+      Submission
+   </h3>
+   <p>
+      You are required to submit to the <a href="https://adb.auckland.ac.nz/">
+         Assignment Dropbox
+      </a> the following items.
+   </p>
+   <ol>
+      <li>
+         A ZIP archive containing the source files of the UI you developed for the online
+         shop.
+      </li>
+      <li>A text file containing your answers to the pen-testing questions.</li>
+   </ol>
+   <p>
+      Please consult the <a href="https://adb.auckland.ac.nz/">Assignment Dropbox</a>
+      for the deadline of this assignment.
+   </p>
+   <hr>
+   <p>
+      Last updated: <em>Wed 23 Sep 2015 12:54:33 NZST </em>by mano@cs.auckland.ac.nz.
+   </p>
+
+
+</body></html>
